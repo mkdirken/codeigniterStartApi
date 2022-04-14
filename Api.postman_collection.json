@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "d45c55eb-d4c7-477c-a64e-9fff0ccb6e14",
+		"name": "Yanino Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Email Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"if(response.statusCode==200){\r",
+									"    pm.environment.set(\"jwt_token\",response.data.jwt);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "mkdirken@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/auth/email_login",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"auth",
+								"email_login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Phone Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json();\r",
+									"if(response.statusCode==200){\r",
+									"    pm.environment.set(\"jwt_token\",response.data.jwt);\r",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "country_code",
+									"value": "90",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "5061270407",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/auth/phone_login",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"auth",
+								"phone_login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WALLET",
+			"item": [
+				{
+					"name": "Wallet Info",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{jwt_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/wallet/info",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"wallet",
+								"info"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseurl",
+			"value": "http://127.0.0.1/yaninoRestApi/api/",
+			"type": "string"
+		},
+		{
+			"key": "jwt_token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
